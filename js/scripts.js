@@ -6,29 +6,32 @@ function Place(locale, landmarks, time, notes) {
 }
 
 Place.prototype.localeTimeNote = function() {
-  return this.locale + ": " + this.time + " " + this.notes;
+  return this.time + " - " + this.notes;
 }
 
 
 
-// $(document).ready(function() {
-//   $("form#new-contact").submit(function(event){
-//     event.preventDefault();
-//
-//     var inputtedFirstName = $("input#new-first-name").val();
-//     var inputtedLastName = $("input#new-last-name").val();
-//     var newContact = new Contact(inputtedFirstName, inputtedLastName);
-//
-//     $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
-//
-//     $(".contact").last().click(function() {
-//       $("#show-contact").show();
-//       $("#show-contact h2").text(newContact.fullName());
-//       $(".first-name").text(newContact.firstName);
-//       $(".last-name").text(newContact.lastName);
-//     });
-//
-//     $("input#new-first-name").val("");
-//     $("input#new-last-name").val("");
-//   });
-// });
+$(document).ready(function() {
+  $("form#new-contact").submit(function(event){
+    event.preventDefault();
+
+    var inputtedLocale = $("input#new-locale").val();
+    var inputtedLandmarks = $("input#new-landmarks").val();
+    var inputtedTime = $("input#new-time").val();
+    var inputtedNotes = $("input#new-notes").val();
+    var newPlace = new Place(inputtedLocale, inputtedLandmarks, inputtedTime, inputtedNotes);
+
+    $("ul#place").append("<li><span class='place'>" + newPlace.locale + "</span></li>");
+
+    $(".place").last().click(function() {
+      $("#show-place").show();
+      $("#show-place h2").text(newPlace.locale + ":");
+      $(".allAtOnce").text(newPlace.localeTimeNote());
+    });
+
+    $("input#new-locale").val("");
+    $("input#new-landmarks").val("");
+    $("input#new-time").val("");
+    $("input#new-notes").val("");
+  });
+});
